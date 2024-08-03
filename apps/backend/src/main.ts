@@ -6,6 +6,11 @@
 import express from 'express';
 import * as path from 'path';
 
+//Setting up low DB
+const userFile = path.join(__dirname, 'db', 'users.json');
+const productFile = path.join(__dirname, 'db', 'products.json');
+const categoryFile = path.join(__dirname, 'db', 'categories.json');
+
 const app = express();
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
