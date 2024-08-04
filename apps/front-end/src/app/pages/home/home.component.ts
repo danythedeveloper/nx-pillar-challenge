@@ -1,16 +1,23 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { MenuItem } from 'primeng/api/menuitem';
 import { MenubarModule } from 'primeng/menubar';
+import { Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { Increment } from '../../store/dashboard/states/counter/counter.actions';
+import { CounterState } from '../../store/dashboard/states/counter/counter.state';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, MenubarModule],
+  imports: [CommonModule, MenubarModule, AsyncPipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
+  private store = inject(Store);
+  count$: Observable<number> = this.store.select(CounterState.getCount);
+
   items: MenuItem[];
 
   constructor() {
@@ -41,5 +48,9 @@ export class HomeComponent {
         routerLink: '/login',
       },
     ];
+  }
+
+  add() {
+    this.store.dispatch(new Increment());
   }
 }
