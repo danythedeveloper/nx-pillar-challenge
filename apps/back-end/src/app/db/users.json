@@ -1,0 +1,10 @@
+{
+  "users": [
+    {
+      "name": "Test User",
+      "email": "test.user@example.com",
+      "password": "b8f1d45a75df5c15887367d3448d4644:53a5c584f5c27b68dfec1a956aa0bf7199d4efd4e6dca6ffbbee6d75222773fd203aba5c9962f4fc4df00d46697d1ecafd37359170bcbac1a7f1d8f081dc6b46",
+      "id": "1722759044238"
+    }
+  ]
+}
