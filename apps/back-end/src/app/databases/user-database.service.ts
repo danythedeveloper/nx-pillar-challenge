@@ -22,7 +22,7 @@ export class UserService extends AbstractDatabaseService<UserDatabase> {
     return this.db.data;
   }
 
-  async add(user: Omit<User, 'id'>): Promise<void> {
+  async add(user: Omit<User, 'id'>) {
     await this.db.read();
     const existingUser = this.db.data.users.find((u) => u.email === user.email);
     if (existingUser) {

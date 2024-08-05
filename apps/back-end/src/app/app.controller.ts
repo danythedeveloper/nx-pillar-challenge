@@ -21,6 +21,7 @@ export class AppController {
     private authService: AuthService
   ) {}
 
+  @Public()
   @Get()
   getData() {
     return this.appService.getData();
@@ -29,29 +30,20 @@ export class AppController {
   @Public()
   @Post('login')
   async login(@Body() loginUserDto: LoginUserDto) {
-    const user = await this.authService.validateUser(
-      loginUserDto.email,
-      loginUserDto.password
-    );
-    if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
-    }
-    return this.authService.login(user);
+    return this.authService.login(loginUserDto);
   }
 
   @Public()
   @Post('register')
   async register(@Body() registerUserDto: RegisterUserDto) {
-    console.log('Register');
     await this.userService.add(registerUserDto);
-    return { message: 'User registered successfully' };
+    return this.authService.login(registerUserDto);
   }
 
   @Public()
   @Get('test-register')
   async testRegister() {
     const registerUserDto: RegisterUserDto = {
-      name: 'Test User',
       email: 'test.user@example.com',
       password: 'password123',
     };
