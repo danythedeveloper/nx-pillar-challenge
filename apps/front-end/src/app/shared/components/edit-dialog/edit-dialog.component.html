@@ -1,0 +1,25 @@
+<p-dialog
+  class="edit-dialog"
+  [(visible)]="visible"
+  modal="true"
+  [closable]="false"
+>
+  <p-header>
+    <h3>{{ title }}</h3>
+  </p-header>
+  <form [formGroup]="form">
+    <div class="dialog-controls" *ngFor="let key of objectKeys(form.controls)">
+      <label [for]="key">{{ key | titlecase }}</label>
+      <input onVal pInputText [id]="key" [formControlName]="key" />
+    </div>
+  </form>
+  <p-footer>
+    <p-button size="small" label="Save" (onClick)="save()"></p-button>
+    <p-button
+      size="small"
+      label="Cancel"
+      severity="danger"
+      (onClick)="close()"
+    ></p-button>
+  </p-footer>
+</p-dialog>

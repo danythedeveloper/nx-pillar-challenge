@@ -3,6 +3,14 @@
     {
       "id": "1",
       "name": "Electronics"
+    },
+    {
+      "name": "Make Ups",
+      "id": "b8cbd7008a49f679246d612a11fe8bb9"
+    },
+    {
+      "name": "Pets",
+      "id": "511cd30c244f320905359147ec4005fd"
     }
   ]
 }

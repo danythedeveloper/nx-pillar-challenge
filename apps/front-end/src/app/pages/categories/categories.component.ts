@@ -1,6 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DatagridComponent } from '../../shared/components/datagrid/datagrid.component';
+import { Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { Category } from '../../model/types/category.type';
+import { CategoryState } from '../../store/dashboard/states/category/category.state';
+import {
+  AddCategory,
+  EditCategory,
+  LoadCategories,
+} from '../../store/dashboard/states/category/category.actions';
 
 @Component({
   selector: 'app-categories',
@@ -9,11 +18,24 @@ import { DatagridComponent } from '../../shared/components/datagrid/datagrid.com
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss',
 })
-export class CategoriesComponent {
-  categories = [
-    { id: 1, category: 'Electronics' },
-    { id: 2, category: 'Video Games' },
-    { id: 3, category: 'Sports' },
-    { id: 4, category: 'Camping' },
-  ];
+export class CategoriesComponent implements OnInit {
+  private store = inject(Store);
+  public categories$: Observable<Category[]> = this.store.select(
+    CategoryState.getCategories
+  );
+
+  ngOnInit(): void {
+    this.store.dispatch(new LoadCategories());
+  }
+
+  saveModifiedCategory(modifiedCategory: Category) {
+    console.log('Modified', modifiedCategory);
+    this.store.dispatch(
+      new EditCategory(modifiedCategory.id, modifiedCategory.name)
+    );
+  }
+
+  createCategory(modifiedCategory: Category) {
+    this.store.dispatch(new AddCategory(modifiedCategory));
+  }
 }

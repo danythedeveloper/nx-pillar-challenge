@@ -11,7 +11,6 @@ import { AuthState } from '../../store/auth/auth.state';
 import { UserData } from '../../model/types/user.type';
 import { Logout } from '../../store/auth/auth.actions';
 import { RouterModule } from '@angular/router';
-import { UsersComponent } from '../users/users.component';
 
 @Component({
   selector: 'app-home',

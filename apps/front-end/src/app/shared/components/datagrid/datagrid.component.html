@@ -3,10 +3,12 @@
     <h2>{{ title }}</h2>
     <div class="actions">
       <p-dropdown
+        *ngIf="filterable"
         class="custom-primeng"
         placeholder="Filter by..."
       ></p-dropdown>
       <p-button
+        (onClick)="openAddDialog()"
         class="custom-primeng"
         *ngIf="editable"
         size="small"
@@ -40,7 +42,7 @@
                   class="flex flex-column gap-2 mt-2"
                   *ngIf="key !== 'img' && key !== 'id'"
                 >
-                  <strong>{{ key | uppercase }}:</strong>
+                  <strong>{{ key | titlecase }}:</strong>
                   <p class="item">{{ item[key] }}</p>
                 </div>
               </div>
@@ -52,6 +54,7 @@
                   class="p-button-sm"
                   label="Edit"
                   severity="contrast"
+                  (onClick)="openEditDialog(item)"
                 ></p-button>
               </div>
             </div>
@@ -61,3 +64,10 @@
     </ng-template>
   </p-dataView>
 </div>
+
+<app-edit-dialog
+  *ngIf="editable"
+  (onClose)="closeDialog()"
+  (onSave)="onSaveDialog($event)"
+>
+</app-edit-dialog>
