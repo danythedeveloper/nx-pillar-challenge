@@ -31,6 +31,11 @@ export class AuthState {
   }
 
   @Selector()
+  static token(state: AuthStateModel): string {
+    return state.token;
+  }
+
+  @Selector()
   static isAuthenticated(state: AuthStateModel): boolean {
     return !!state.token;
   }
@@ -49,7 +54,7 @@ export class AuthState {
           email: result.email,
           token: result.access_token,
         });
-        this.router.navigate(['/home']);
+        this.router.navigate(['/dashboard']);
       }),
       catchError((err) => {
         console.error(err);
@@ -64,6 +69,7 @@ export class AuthState {
       email: '',
       token: '',
     });
+    localStorage.removeItem('auth');
     this.router.navigate(['/login']);
   }
 }

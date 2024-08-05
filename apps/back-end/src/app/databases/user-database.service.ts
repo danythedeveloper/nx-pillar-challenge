@@ -17,9 +17,9 @@ export class UserService extends AbstractDatabaseService<UserDatabase> {
     super('users.json', { users: [] });
   }
 
-  async getAll(): Promise<UserDatabase> {
+  async getItems(): Promise<Omit<User, 'password'>[]> {
     await this.db.read();
-    return this.db.data;
+    return this.db.data.users.map(({ password, ...user }) => user);
   }
 
   async add(user: Omit<User, 'id'>) {

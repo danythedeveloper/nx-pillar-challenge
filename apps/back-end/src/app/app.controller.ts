@@ -40,14 +40,8 @@ export class AppController {
     return this.authService.login(registerUserDto);
   }
 
-  @Public()
-  @Get('test-register')
-  async testRegister() {
-    const registerUserDto: RegisterUserDto = {
-      email: 'test.user@example.com',
-      password: 'password123',
-    };
-    await this.userService.add(registerUserDto);
-    return { message: 'User registered successfully' };
+  @Get('users')
+  async getUsers() {
+    return this.userService.getItems();
   }
 }

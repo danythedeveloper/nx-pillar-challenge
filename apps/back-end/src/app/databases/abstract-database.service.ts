@@ -20,6 +20,6 @@ export abstract class AbstractDatabaseService<T> implements OnModuleInit {
     }
   }
 
-  abstract getAll(): Promise<T>;
+  abstract getItems(): Promise<any>;
   abstract add(item: Omit<any, 'id'>): Promise<void>;
 }

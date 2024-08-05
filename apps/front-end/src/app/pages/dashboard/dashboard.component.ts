@@ -10,15 +10,17 @@ import { CounterState } from '../../store/dashboard/states/counter/counter.state
 import { AuthState } from '../../store/auth/auth.state';
 import { UserData } from '../../model/types/user.type';
 import { Logout } from '../../store/auth/auth.actions';
+import { RouterModule } from '@angular/router';
+import { UsersComponent } from '../users/users.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, MenubarModule, AsyncPipe, AvatarModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  imports: [CommonModule, MenubarModule, AsyncPipe, AvatarModule, RouterModule],
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.scss',
 })
-export class HomeComponent {
+export class DashboardComponent {
   private store = inject(Store);
   count$: Observable<number> = this.store.select(CounterState.getCount);
   //User Data
@@ -36,22 +38,22 @@ export class HomeComponent {
           {
             label: 'Home',
             icon: 'pi pi-fw pi-home',
-            routerLink: '/home',
+            routerLink: '/dashboard',
           },
           {
             label: 'Products',
             icon: 'pi pi-fw pi-list',
-            routerLink: '/products',
+            routerLink: '/dashboard/products',
           },
           {
             label: 'Users',
             icon: 'pi pi-fw pi-users',
-            routerLink: '/users',
+            routerLink: '/dashboard/users',
           },
           {
             label: 'Categories',
             icon: 'pi pi-fw pi-tags',
-            routerLink: '/categories',
+            routerLink: '/dashboard/categories',
           },
           {
             label: 'Logout',
