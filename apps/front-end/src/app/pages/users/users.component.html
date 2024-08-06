@@ -1,0 +1,8 @@
+<ng-container *ngIf="users$ | async as users">
+  <app-datagrid
+    [filterable]="false"
+    title="Users"
+    [data]="users"
+    [editable]="false"
+  ></app-datagrid>
+</ng-container>

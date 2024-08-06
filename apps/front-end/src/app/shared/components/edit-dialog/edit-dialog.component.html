@@ -1,0 +1,40 @@
+<p-dialog
+  class="edit-dialog"
+  [(visible)]="visible"
+  modal="true"
+  [closable]="false"
+>
+  <p-header>
+    <h3>{{ title }}</h3>
+  </p-header>
+  <form [formGroup]="form">
+    <div class="dialog-controls" *ngFor="let key of objectKeys(form.controls)">
+      <div [ngSwitch]="getFieldConfig(key)?.type">
+        <label [for]="key">{{ getFieldConfig(key)?.label | titlecase }}</label>
+        <p-dropdown
+          *ngSwitchCase="'dropdown'"
+          [options]="getFieldConfig(key)?.options"
+          optionLabel="label"
+          optionValue="value"
+          [formControlName]="key"
+          placeholder="Select a value"
+        ></p-dropdown>
+        <ng-container *ngSwitchDefault>
+          <label [for]="key">{{ key | titlecase }}</label>
+          <input pInputText [id]="key" [formControlName]="key" />
+        </ng-container>
+      </div>
+    </div>
+  </form>
+  <p-footer>
+    <p-button size="small" label="Save" (onClick)="confirmSave()"></p-button>
+    <p-button
+      size="small"
+      label="Cancel"
+      severity="danger"
+      (onClick)="confirmClose()"
+    ></p-button>
+  </p-footer>
+</p-dialog>
+
+<app-confirm-dialog></app-confirm-dialog>

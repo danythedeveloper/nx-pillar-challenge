@@ -1,0 +1,73 @@
+<div class="grid-container">
+  <div class="controls">
+    <h2>{{ title }}</h2>
+    <div class="actions">
+      <p-dropdown
+        *ngIf="filterable"
+        class="custom-primeng"
+        placeholder="Filter by..."
+      ></p-dropdown>
+      <p-button
+        (onClick)="openAddDialog()"
+        class="custom-primeng"
+        *ngIf="editable"
+        size="small"
+        icon="pi pi-plus"
+        outlined="true"
+        class="p-button-sm"
+        label="Add New"
+      ></p-button>
+    </div>
+  </div>
+  <p-dataView class="custom-grid" [value]="data" layout="grid">
+    <ng-template let-item let-i="index" pTemplate="grid">
+      <div class="grid grid-nogutter">
+        <div
+          class="col-12 sm:col-6 md:col-4 xl:col-4 p-2"
+          *ngFor="let item of data; let i = index"
+        >
+          <div
+            class="p-4 border-1 surface-border surface-card border-round flex flex-column"
+          >
+            <div
+              *ngIf="showImages"
+              class="surface-50 flex justify-content-center border-round p-3 gradient-placeholder"
+              [style.background]="getGradient(i)"
+            >
+              <div class="relative mx-auto w-full" style="height: 200px"></div>
+            </div>
+            <div [ngClass]="{ 'p-4': showImages, 'p-1': !showImages }">
+              <div *ngFor="let key of getDisplayableFields(item)">
+                <div
+                  class="flex flex-column gap-2 mt-2"
+                  *ngIf="key !== 'img' && key !== 'id'"
+                >
+                  <strong>{{ key | titlecase }}:</strong>
+                  <p class="item">{{ item[key] }}</p>
+                </div>
+              </div>
+              <div class="flex justify-content-end mt-4">
+                <p-button
+                  *ngIf="editable"
+                  size="small"
+                  icon="pi pi-pencil"
+                  class="p-button-sm"
+                  label="Edit"
+                  severity="contrast"
+                  (onClick)="openEditDialog(item)"
+                ></p-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataView>
+</div>
+
+<app-edit-dialog
+  *ngIf="editable"
+  (onClose)="closeDialog()"
+  (onSave)="onSaveDialog($event)"
+>
+</app-edit-dialog>

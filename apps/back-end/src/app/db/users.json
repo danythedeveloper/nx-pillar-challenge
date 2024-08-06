@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "email": "prueba@prueba.com",
+      "password": "287162904497d0f658386df96e2e3a8d:ac501b47fa215f5b2f85c299538b0178f0dc4e72ff761f12b96ca4b4076c5bbe0193fcede236d2f8fdc28f18c6d37d2a696ceac6054318c36a42e871f7e83331",
+      "id": "1722923403771"
+    },
+    {
+      "email": "test@pillar.com",
+      "password": "a02f0852f152740f6f630bba5391c08e:b24782112581f6b3155de7551fb826df75e0aa4176205e9205d6ecada06d255a489565befcdccf2b33fb37675f83b98963e78b0b159ee9aea5fc8899e6e91d5b",
+      "id": "1722924044856"
+    }
+  ]
+}

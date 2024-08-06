@@ -1,0 +1,14 @@
+<p-menubar [model]="items">
+  <ng-template pTemplate="end" *ngIf="user$ | async as user">
+    <div class="flex align-items-center gap-2">
+      <p class="m-0">{{ user.email }}</p>
+      <p-avatar
+        image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPpMv0Ot3uIzP8TRIheobYZXdjO9e86uS__zqrwB74xfG7RwZpktBXaT1opqtbENvPL58&usqp=CAU"
+        shape="circle"
+      />
+    </div>
+  </ng-template>
+</p-menubar>
+<div class="home-content">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,21 @@
+/* src/app/about/about.component.scss */
+.about-container {
+  padding: 20px;
+  text-align: center;
+
+  .tech-logo {
+    width: 100px;
+    height: auto;
+    margin: 10px;
+  }
+
+  .stack {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .tech-logo {
+      margin: 0 10px;
+    }
+  }
+}

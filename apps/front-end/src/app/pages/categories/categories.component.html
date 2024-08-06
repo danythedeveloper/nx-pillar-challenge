@@ -1,0 +1,11 @@
+<ng-container *ngIf="categories$ | async as categories">
+  <app-datagrid
+    title="Categories"
+    [editable]="true"
+    [data]="categories"
+    [showImages]="false"
+    (onEdit)="saveModifiedCategory($event)"
+    (onCreate)="createCategory($event)"
+    [filterable]="false"
+  ></app-datagrid>
+</ng-container>
