@@ -37,7 +37,7 @@
               <div class="relative mx-auto w-full" style="height: 200px"></div>
             </div>
             <div [ngClass]="{ 'p-4': showImages, 'p-1': !showImages }">
-              <div *ngFor="let key of objectKeys(item)">
+              <div *ngFor="let key of getDisplayableFields(item)">
                 <div
                   class="flex flex-column gap-2 mt-2"
                   *ngIf="key !== 'img' && key !== 'id'"

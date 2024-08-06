@@ -1,6 +1,14 @@
-<app-datagrid
-  title="Products"
-  [editable]="true"
-  [data]="products"
-  [showImages]="true"
-></app-datagrid>
+<ng-container *ngIf="productsGridData$ | async as combined">
+  <app-datagrid
+    *ngIf="showDataGrid"
+    title="Products"
+    [editable]="true"
+    [data]="combined.products"
+    [showImages]="true"
+    [filterable]="false"
+    (onEdit)="saveModifiedProduct($event)"
+    (onCreate)="createProduct($event)"
+    [nonVisibleFields]="['categoryId']"
+    [fieldConfigs]="productFieldConfigs"
+  ></app-datagrid>
+</ng-container>

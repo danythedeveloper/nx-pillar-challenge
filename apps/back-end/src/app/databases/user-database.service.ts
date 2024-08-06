@@ -4,7 +4,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { AbstractDatabaseService } from './abstract-database.service';
-import { User } from '../model/interfaces/user.interface';
+import { User } from '../model/types/user.type';
 import { randomBytes, pbkdf2Sync } from 'crypto';
 
 interface UserDatabase {

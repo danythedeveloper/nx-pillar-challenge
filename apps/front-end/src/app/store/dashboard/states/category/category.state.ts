@@ -28,7 +28,6 @@ export class CategoryState {
   loadCategories(ctx: StateContext<CategoryStateModel>) {
     return this.categoryService.getCategories().pipe(
       tap((categories) => {
-        console.log(categories);
         ctx.patchState({ categories: categories });
       })
     );

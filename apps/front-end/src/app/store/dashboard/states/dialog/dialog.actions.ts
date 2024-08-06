@@ -1,7 +1,14 @@
+import { FieldConfig } from 'apps/front-end/src/app/model/types/fieldConfig.type';
+
 export class OpenDialog {
   static readonly type = '[Dialog] Open';
   constructor(
-    public payload: { item: any; isNew: boolean; dialogTitle: string }
+    public payload: {
+      item: any;
+      isNew: boolean;
+      dialogTitle: string;
+      fieldConfigs: FieldConfig[];
+    }
   ) {}
 }
 

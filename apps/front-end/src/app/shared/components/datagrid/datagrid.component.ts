@@ -14,13 +14,12 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { DropdownModule } from 'primeng/dropdown';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { Store } from '@ngxs/store';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { DialogState } from '../../../store/dashboard/states/dialog/dialog.state';
 import {
   CloseDialog,
   OpenDialog,
-  SaveDialogState,
 } from '../../../store/dashboard/states/dialog/dialog.actions';
+import { FieldConfig } from '../../../model/types/fieldConfig.type';
+import { DialogState } from '../../../store/dashboard/states/dialog/dialog.state';
 
 @Component({
   selector: 'app-datagrid',
@@ -45,15 +44,31 @@ export class DatagridComponent<T extends { [key: string]: any }> {
   @Input() filterable: boolean = true;
   @Output() onEdit: EventEmitter<T> = new EventEmitter();
   @Output() onCreate: EventEmitter<T> = new EventEmitter();
+  @Input() nonVisibleFields: string[] = [];
+  @Input() nonEditableFields: string[] = [];
+  @Input() fieldConfigs: FieldConfig[] = [];
+  isCreateDialog = false;
   //Expose Object.keys function to template and component
   objectKeys = Object.keys;
 
   //Store values for data persistance
   private store = inject(Store);
+  dialogData$ = this.store.select(DialogState.dialogData);
+
+  constructor() {
+    this.dialogData$.subscribe((dialogData) => {
+      this.isCreateDialog = dialogData.isNewItem;
+    });
+  }
 
   openEditDialog(item: T) {
     this.store.dispatch(
-      new OpenDialog({ item, isNew: false, dialogTitle: 'Edit Category' })
+      new OpenDialog({
+        item,
+        isNew: false,
+        dialogTitle: `Edit ${this.title}`,
+        fieldConfigs: this.fieldConfigs,
+      })
     );
   }
 
@@ -63,13 +78,16 @@ export class DatagridComponent<T extends { [key: string]: any }> {
       new OpenDialog({
         item: defaultItem,
         isNew: true,
-        dialogTitle: 'Add Category',
+        dialogTitle: `Add ${this.title}`,
+        fieldConfigs: this.fieldConfigs,
       })
     );
   }
 
   onSaveDialog(modifiedItem: T) {
-    this.onEdit.emit(modifiedItem);
+    this.isCreateDialog
+      ? this.onCreate.emit(modifiedItem)
+      : this.onEdit.emit(modifiedItem);
     this.closeDialog();
   }
 
@@ -85,6 +103,12 @@ export class DatagridComponent<T extends { [key: string]: any }> {
       }
     }
     return defaultItem as T;
+  }
+
+  getDisplayableFields(item: T): string[] {
+    return this.objectKeys(item).filter(
+      (key) => key !== 'id' && !this.nonVisibleFields.includes(key)
+    );
   }
 
   gradients: string[] = [

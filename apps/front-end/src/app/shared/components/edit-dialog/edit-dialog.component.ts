@@ -2,11 +2,10 @@ import {
   Component,
   EventEmitter,
   inject,
-  Input,
-  OnChanges,
   OnDestroy,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
@@ -22,6 +21,9 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 import { Store } from '@ngxs/store';
 import { SaveDialogState } from '../../../store/dashboard/states/dialog/dialog.actions';
 import { DialogState } from '../../../store/dashboard/states/dialog/dialog.state';
+import { FieldConfig } from '../../../model/types/fieldConfig.type';
+import { DropdownModule } from 'primeng/dropdown';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -32,6 +34,8 @@ import { DialogState } from '../../../store/dashboard/states/dialog/dialog.state
     InputTextModule,
     ReactiveFormsModule,
     ButtonModule,
+    DropdownModule,
+    ConfirmDialogComponent,
   ],
   templateUrl: './edit-dialog.component.html',
   styleUrls: ['./edit-dialog.component.scss'],
@@ -39,6 +43,9 @@ import { DialogState } from '../../../store/dashboard/states/dialog/dialog.state
 export class EditDialogComponent implements OnInit, OnDestroy {
   @Output() onSave: EventEmitter<any> = new EventEmitter();
   @Output() onClose: EventEmitter<void> = new EventEmitter();
+  @ViewChild(ConfirmDialogComponent)
+  confirmationDialog!: ConfirmDialogComponent;
+  public fieldConfigs: FieldConfig[] = [];
   title = '';
   form!: FormGroup;
   objectKeys = Object.keys;
@@ -53,7 +60,6 @@ export class EditDialogComponent implements OnInit, OnDestroy {
   dialogUnsubscribe$ = new Subject<void>();
 
   constructor(private fb: FormBuilder) {
-    // Initialize the form group with an empty form
     this.form = this.fb.group({});
   }
 
@@ -61,19 +67,27 @@ export class EditDialogComponent implements OnInit, OnDestroy {
     this.store
       .select(DialogState.dialogData)
       .pipe(takeUntil(this.formUnsubscribe$))
-      .subscribe(({ dialogVisible, selectedItem, isNewItem, dialogTitle }) => {
-        this.visible = dialogVisible;
-        console.log(dialogTitle);
-        if (selectedItem && !this.isFormInitialized) {
-          this.data = selectedItem;
-          this.originalData = { ...selectedItem };
-          this.createForm();
-          this.title = dialogTitle;
-          this.isFormInitialized = true;
-        }
+      .subscribe(
+        ({
+          dialogVisible,
+          selectedItem,
+          isNewItem,
+          dialogTitle,
+          fieldConfigs,
+        }) => {
+          this.visible = dialogVisible;
+          if (selectedItem && !this.isFormInitialized) {
+            this.data = selectedItem;
+            this.originalData = { ...selectedItem };
+            this.fieldConfigs = fieldConfigs;
+            this.createForm();
+            this.title = dialogTitle;
+            this.isFormInitialized = true;
+          }
 
-        this.isNew = isNewItem;
-      });
+          this.isNew = isNewItem;
+        }
+      );
   }
 
   ngOnDestroy(): void {
@@ -86,7 +100,7 @@ export class EditDialogComponent implements OnInit, OnDestroy {
   createForm() {
     const formControls: { [key: string]: any } = {};
     for (const key in this.data) {
-      if (key !== 'id') {
+      if (key !== 'id' && !this.getFieldConfig(key)?.hidden) {
         formControls[key] = [this.data[key], Validators.required];
       }
     }
@@ -101,11 +115,26 @@ export class EditDialogComponent implements OnInit, OnDestroy {
       });
   }
 
+  getFieldConfig(key: string): FieldConfig | undefined {
+    return this.fieldConfigs.find((config) => config.key === key);
+  }
+
+  confirmSave() {
+    this.confirmationDialog.confirm(
+      'Are you sure you want to save the changes?'
+    );
+    this.confirmationDialog.onConfirm.subscribe(() => this.save());
+  }
+
+  confirmClose() {
+    this.confirmationDialog.confirm('Are you sure you want to cancel?');
+    this.confirmationDialog.onConfirm.subscribe(() => this.close());
+  }
+
   save() {
     if (this.form.valid) {
       const editedData = { ...this.data, ...this.form.value };
       if (this.isNew || this.hasChanges(editedData)) {
-        console.log('new', this.isNew, this.hasChanges(editedData));
         this.onSave.emit(editedData);
       }
       this.isFormInitialized = false;
@@ -113,14 +142,14 @@ export class EditDialogComponent implements OnInit, OnDestroy {
     }
   }
 
+  close() {
+    this.isFormInitialized = false;
+    this.onClose.emit();
+  }
+
   hasChanges(editedData: any): boolean {
     return Object.keys(this.originalData).some(
       (key) => this.originalData[key] !== editedData[key]
     );
-  }
-
-  close() {
-    this.isFormInitialized = false;
-    this.onClose.emit();
   }
 }

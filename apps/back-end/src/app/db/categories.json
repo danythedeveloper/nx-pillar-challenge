@@ -2,15 +2,19 @@
   "categories": [
     {
       "id": "1",
-      "name": "Electronics"
+      "name": "Gamess"
     },
     {
-      "name": "Make Ups",
+      "name": "Make Upssdsdsds",
       "id": "b8cbd7008a49f679246d612a11fe8bb9"
     },
     {
       "name": "Pets",
       "id": "511cd30c244f320905359147ec4005fd"
+    },
+    {
+      "name": "Food",
+      "id": "1f86e88c12accf57fff345bb2adb378a"
     }
   ]
 }

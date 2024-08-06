@@ -29,7 +29,6 @@ export class CategoriesComponent implements OnInit {
   }
 
   saveModifiedCategory(modifiedCategory: Category) {
-    console.log('Modified', modifiedCategory);
     this.store.dispatch(
       new EditCategory(modifiedCategory.id, modifiedCategory.name)
     );

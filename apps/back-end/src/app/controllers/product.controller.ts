@@ -33,10 +33,9 @@ export class ProductController {
   @Put(':id')
   async editProduct(
     @Param('id') id: string,
-    @Body('name') name: string,
-    @Body('price') price: number,
-    @Body('categoryId') categoryId: string
+    @Body() productDto: Partial<Product>
   ) {
+    const { name, price, categoryId } = productDto;
     try {
       await this.productService.edit(id, name, price, categoryId);
       return { message: 'Product updated successfully' };

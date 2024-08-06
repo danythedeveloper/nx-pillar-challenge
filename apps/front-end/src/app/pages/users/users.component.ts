@@ -2,10 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { DatagridComponent } from '../../shared/components/datagrid/datagrid.component';
 import { Store } from '@ngxs/store';
-import {
-  GetUsers,
-  LoadUsers,
-} from '../../store/dashboard/states/users/users.actions';
+import { LoadUsers } from '../../store/dashboard/states/users/users.actions';
 import { Observable } from 'rxjs';
 import { UserData } from '../../model/types/user.type';
 import { UsersState } from '../../store/dashboard/states/users/users.state';

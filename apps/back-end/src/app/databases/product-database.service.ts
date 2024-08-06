@@ -43,7 +43,7 @@ export class ProductService extends AbstractDatabaseService<ProductDatabase> {
   async edit(
     id: string,
     name: string,
-    price: number,
+    price: string,
     categoryId: string
   ): Promise<void> {
     await this.db.read();
