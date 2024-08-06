@@ -19,13 +19,32 @@ If you are using nvm, use the following commands:
 ```bash
 nvm install 20.16.0
 nvm use 20.16.0
+```
+
+💻Front End Dependencies
+
+Position in the root folder and install with npm.
+
+```bash
+/nx-pillar-challenge/
+npm install # inside the monorepo
+```
+
+🔙 Back End Dependencies
+
+Position inside the back-end folder and install with npm:
+
+```bash
+/nx-pillar-challenge/
 npm install # inside the monorepo
 ```
 
 To run the back-end and front-end, you can use the Nx console extension for VS Code or run:
 
+```bash
 npx nx run back-end:serve
 npx nx run front-end:serve
+```
 
 The front end will run on PORT: 4200 and the back end on 3000
 
@@ -41,4 +60,4 @@ Or register with a new account.
 
 ## 📝 FYI
 
-I would have liked to invest more time in styling, unit testing, deployment, and more interesting subjects. Unfortunately, this is the most time I can invest at the moment. I appreciate the opportunity to test myself with new technologies like Nx and to learn new things. I hope this project meets the qualifications.
+I would have liked to invest more time in styling, unit testing, deployment, loading spinner, and more interesting subjects. Unfortunately, this is the most time I can invest at the moment. I appreciate the opportunity to test myself with new technologies like Nx and to learn new things. I hope this project meets the qualifications.

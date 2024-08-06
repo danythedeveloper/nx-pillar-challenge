@@ -9,6 +9,11 @@
       "email": "test@pillar.com",
       "password": "a02f0852f152740f6f630bba5391c08e:b24782112581f6b3155de7551fb826df75e0aa4176205e9205d6ecada06d255a489565befcdccf2b33fb37675f83b98963e78b0b159ee9aea5fc8899e6e91d5b",
       "id": "1722924044856"
+    },
+    {
+      "email": "daniel@daniel.com",
+      "password": "f63fcbaebda340dfbd895d047ceaec19:6d1494693c92e6f3e14c4171717e4bd9e98f9cb0691654d64288304b3990d94cf72f091b27b3c5d75982715e9eefd95b284f55067fc9c1fc0b590e0d43578e0a",
+      "id": "1722932170364"
     }
   ]
 }
