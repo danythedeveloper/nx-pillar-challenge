@@ -60,4 +60,4 @@ Or register with a new account.
 
 ## 📝 FYI
 
-I would have liked to invest more time in styling, unit testing, deployment, loading spinner, and more interesting subjects. Unfortunately, this is the most time I can invest at the moment. I appreciate the opportunity to test myself with new technologies like Nx and to learn new things. I hope this project meets the qualifications.
+I would have liked to invest more time in styling, unit testing, deployment, and more interesting subjects. Unfortunately, this is the most time I can invest at the moment. I appreciate the opportunity to test myself with new technologies like Nx and to learn new things. I hope this project meets the qualifications.
