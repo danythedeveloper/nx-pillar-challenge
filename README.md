@@ -35,8 +35,8 @@ npm install # inside the monorepo
 Position inside the back-end folder and install with npm:
 
 ```bash
-/nx-pillar-challenge/
-npm install # inside the monorepo
+/nx-pillar-challenge/apps/back-end/
+npm install # inside the back end app
 ```
 
 To run the back-end and front-end, you can use the Nx console extension for VS Code or run:
