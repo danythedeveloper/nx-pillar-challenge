@@ -1,2 +1,5 @@
 <router-outlet></router-outlet>
 <app-messages></app-messages>
+<div *ngIf="loading$ | async" class="spinner-container">
+  <p-progressSpinner></p-progressSpinner>
+</div>

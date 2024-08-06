@@ -3,26 +3,8 @@
     {
       "id": "3040",
       "price": "100022",
-      "name": "Xboxs",
-      "categoryId": "1f86e88c12accf57fff345bb2adb378a"
-    },
-    {
-      "name": "sword",
-      "price": "100022",
-      "categoryId": "b8cbd7008a49f679246d612a11fe8bb9",
-      "id": "897b140f0c913d9fe89462255806710c"
-    },
-    {
-      "name": "Mousesss",
-      "price": "1202",
-      "categoryId": "1",
-      "id": "b6673ea7eac7ec0dc1b5e8d9a072a2e4"
-    },
-    {
-      "name": "Pizza",
-      "price": "1202",
-      "categoryId": "1f86e88c12accf57fff345bb2adb378a",
-      "id": "0452c8d8aaf5e922d25fa525fdf57da2"
+      "name": "Xbox",
+      "categoryId": "1"
     }
   ]
 }
