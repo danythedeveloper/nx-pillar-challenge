@@ -5,8 +5,12 @@
       "name": "Games"
     },
     {
-      "name": "Art",
+      "name": "Arts",
       "id": "b8cbd7008a49f679246d612a11fe8bb9"
+    },
+    {
+      "name": "Foods",
+      "id": "a7612478a41f847ba5d80b98aa556097"
     }
   ]
 }

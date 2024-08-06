@@ -18,6 +18,7 @@
           optionValue="value"
           [formControlName]="key"
           placeholder="Select a value"
+          appendTo="body"
         ></p-dropdown>
         <ng-container *ngSwitchDefault>
           <label [for]="key">{{ key | titlecase }}</label>
