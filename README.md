@@ -39,11 +39,14 @@ Position inside the back-end folder and install with npm:
 npm install # inside the back end app
 ```
 
-To run the back-end and front-end, you can use the Nx console extension for VS Code or run:
+To run the back-end and front-end, you can use the Nx console extension for VS Code or follow the next steps:
+
+Go back to the root folder and execute
 
 ```bash
-npx nx run back-end:serve
-npx nx run front-end:serve
+/nx-pillar-challenge/
+npx nx run back-end:serve:development
+npx nx run front-end:serve:development
 ```
 
 The front end will run on PORT: 4200 and the back end on 3000
